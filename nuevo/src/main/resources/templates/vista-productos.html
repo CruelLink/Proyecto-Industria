@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{master.html}">
+      <link rel="shortcut icon" th:href="@{/img/icono.ico}">
+<head>
+    <meta charset="UTF-8">
+    <title>365 Beauty Productos</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+        
+                        <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Productos</h2>
+                        </div>
+
+
+    <div class="row">
+        <div class="col-md-3 my-5" th:each="producto : ${productos}"
+             th:object="${producto}">
+            <a th:href="@{/producto/{id}(id=*{id})}" class="card shadow-lg"
+               style="text-decoration: none;">
+                <img th:src="@{/assets/{filename}(filename=*{ruta_imagen})}"
+                     class="card-img-top"
+                     th:alt="*{nombre}">
+                <div class="card-body">
+                    <h2 class="card-title fs-6" th:text="*{nombre}"></h2>
+                     <h4 class="card-text" th:text="*{precio}"></h4>
+                </div>
+            </a>
+        </div>
+
+        <div class="row mt-5" th:with="page=${productos}">		<!--PAGINACION-->
+            <div class="col-sm-6">
+                <div sd:pagination-summary></div>
+            </div>
+            <div class="col-sm-6">
+                <nav>
+                    <ul class="pagination" sd:pagination="full"></ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

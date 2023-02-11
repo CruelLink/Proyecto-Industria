@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{master.html}">		<!--Trabaja con master.html, lo que entiendo esque esta llamando a la plantilla master.html-->
+<head>
+    <meta charset="UTF-8">
+    <title>Administrar Productos | Salon</title>
+</head>
+<body>
+
+<div layout:fragment="content">						<!--VER PARA QUE ESTO-->
+    <h2>Productos</h2>
+
+    <div class="text-end">
+        <a href="/admin/producto/nuevo" class="btn btn-warning">	<!--Boton para crear nuevo producto-->
+            Agregar producto
+        </a>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Producto</th>
+            <th>Precio Lps</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="producto : ${productos}" th:object="${producto}">		<!--${productoss}-> Ha sido enviado desde el AdminController -->		
+            <td style="width: 150px;">																<!--Para mostrar la imagen de portada-->
+                <a th:href="@{/assets/{filename}(filename=*{ruta_imagen})}" data-fancybox>
+                    <img th:src="@{/assets/{filename}(filename=*{ruta_imagen})}"
+                         alt=""
+                         class="img-thumbnail w-100">
+                </a>
+            </td>
+            <td>
+                <div th:text="*{nombre}" class="fs-5 fw-bold"></div>		<!--Para mostrar el nombre y la descripcion del producto-->
+                <p th:text="*{descripcion}"></p>
+            </td>
+            <td th:text="*{precio}"></td>		<!--Mostrar fecha de la pelicula-->
+            
+            <td class="text-end">
+                <a th:href="@{/admin/productos/{id}/editar(id=*{id})}">Editar</a>			<!--Me lleva a la pagina de editar (editar-producto.html)-->
+                
+                <a href="javascript:void(0)" class="text-danger ms-3"
+                   th:onclick="'eliminarProducto(' + *{id} + ')'">Eliminar</a>			<!--ELIMINAR producto (Linea 112 de AdminControllerProductoServicio)...HAY MAS ABAJO LINEA 72 HAY UNA VENTANA EMERGENTE CON Js-->
+                <form th:id="'eliminarProductoForm' + *{id}"
+                      th:action="@{/admin/productos/{id}/eliminar(id=*{id})}"
+                      method="post"
+                      class="d-none"></form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="row mt-5" th:with="page=${productos}">		<!--PAGINACION: NO FUNCIONA-->
+        <div class="col-sm-6">
+            <div sd:pagination-summary></div>
+        </div>
+        <div class="col-sm-6">
+            <nav>
+                <ul class="pagination" sd:pagination="full"></ul>	
+            </nav>
+        </div>
+    </div>
+</div>
+										<!--Como estoy trabajando con layout, ADEMAS TUVE QUE AGREGAR UNA DEPENDENCIA PARA QQUE FUNCIONARA-->
+<div layout:fragment="scripts">			<!--ELIMINAR producto: ESTO ES PARA MOSTRAR UN MENSAJE SI ESTA SEGURO PARA ELIMINAR LA PELICULA y lo llamo en la linea 49 de esta pagina-->
+    <script>							
+        function eliminarProducto(id) {
+            if (!confirm('¿Está seguro de eliminar este producto?')) {
+                return;
+            }
+            $('#eliminarProductoForm' + id).submit();
+        }
+    </script>
+</div>
+</body>
+</html>

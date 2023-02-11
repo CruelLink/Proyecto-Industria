@@ -1,0 +1,119 @@
+body{
+    background: url(../img/fondo3.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.main-section{
+    margin:0 auto;
+    margin-top:25%;
+    padding: 0;
+}
+
+.modal-content{
+    background-color: #3b4652;
+    opacity: .85;
+    padding: 0 20px;
+    box-shadow: 0px 0px 3px #848484;
+}
+.user-img{
+    margin-top: -50px;
+    margin-bottom: 35px;
+}
+
+.user-img img{
+    width: 100xp;
+    height: 100px;
+    box-shadow: 0px 0px 3px #848484;
+    border-radius: 50%;
+}
+
+.form-group input{
+    height: 42px;
+    font-size: 18px;
+    border:0;
+    padding-left: 54px;
+    border-radius: 6px;
+}
+
+.form-group::before{
+    font-family: "Font Awesome\ 5 Free";
+    position: absolute;
+    left: 28px;
+    font-size: 22px;
+    padding-top:4px;
+}
+
+.form-group#user-group::before{
+    content: "\f007";
+}
+
+.form-group#contrasena-group::before{
+    content: "\f023";
+}
+
+button{
+    width: 60%;
+    margin: 5px 0 25px;
+}
+
+.forgot{
+    padding: 5px 0;
+    margin-bottom: 25px;	
+}
+
+.forgot a{
+    color: white;
+}
+
+
+
+
+
+
+
+
+.texto-iniciar-sesion{
+	font-family: "Font Awesome\ 5 Free";
+	color: white;
+}
+
+.titulo{
+    text-align:center; 
+ 	margin-top: 70px;
+ 	font-family: "Font Awesome\ 5 Free";
+ 	color: #DDD7D5;
+ 	
+}
+
+/*TEXTO INFERIOR DEL LOGIN*/
+.texto-inferior p{
+	font-family: "Font Awesome\ 5 Free";
+	/*font-family: oswald, Arial;*/
+	text-align:  center;
+	color: darkgray;
+	font-size: 1.1em;
+	margin-bottom: 0px;			/*Lo dejo en 0 para que la pantalla no tenga que bajar hacia abajo y se quede directa*/
+	margin-top: 0px;
+	background: rgba(0, 0, 0, .5);
+	width: 100%;
+	padding: 20px;
+}
+
+
+
+
+/*Navegacion*/
+.nav-main{
+    font-size: 17px;
+    display: flex;                              /*me permite orgranizar los elementos*//*Para centrar el texto que esta dentro*/
+    justify-content: space-between;             /*separa el contenido (espacio-entre)*/
+    align-items: center;                        /*Centra el contenido en rango de espacio que le pertenece*/
+    height: 60px;                               /*Altura*/
+    padding: 20px 0;
+}
+
+.nav-brand{                     /*Asi le puse a la clase de la imagen: voy hacer pequeña la imagen*/
+    width: 50px;                /*width(ancho)*/
+}
+
+

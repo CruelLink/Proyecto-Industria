@@ -1,0 +1,57 @@
+<!--FORMULARIO PARA CREAR NUEVO PRODUCTO-->
+
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div th:fragment="form">			<!--OJO CON ESTO, UTILIZO ESTO AL MOMENTO DE LLAMAR ESTE HRML A EN OTROS HTML-->
+    <form th:action="@{/admin/productos/{id}/editar(id=*{id})}" method="post" th:object="${producto}" enctype="multipart/form-data">		<!--El form va a trabajar con un objeto plicula-->
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre Producto</label>
+            <input id="nombre" type="text" placeholder="Nombre Producto" class="form-control"
+                   th:field="*{nombre}">
+            <div class="invalid-feedback"				
+                 th:if="${#fields.hasErrors('nombre')}"		
+                 th:errors="*{nombre}"></div>			<!--Si hay errores-->
+        </div>
+
+        <div class="mb-3">
+            <label for="sinopsis" class="form-label">Descripcion</label>
+            <textarea id="descripcion" type="text" placeholder="Descripcion" class="form-control"
+                      th:field="*{descripcion}"></textarea>
+            <div class="invalid-feedback"
+                 th:if="${#fields.hasErrors('descripcion')}"
+                 th:errors="*{descripcion}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input id="precio" type="number" class="form-control"
+                   th:field="*{precio}">
+            <div class="invalid-feedback"
+                 th:if="${#fields.hasErrors('precio')}"
+                 th:errors="*{precio}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen</label>
+            <input id="imagen" name="imagen" type="file" class="form-control">	<!--type:file   porque es una imagen la que agregare-->
+            <div class="invalid-feedback"
+                 th:if="${#fields.hasErrors('imagen')}"		
+                 th:errors="*{imagen}"></div>						<!--Linea 51: Recordar que portada en model es un coampo temporal @Transient  (Linea 45 de model.Pelicula)		VA ALMACENAR UN DIRECTORIO Y LA RUTA ES LA QUE SE VA ALMACENAR EN LA BD-->
+        </div>
+
+
+        <div class="text-end">											<!--BOTON DE GUARDAR-->
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+    
+</div>
+
+</body>
+</html>
